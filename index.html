@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Monitor AI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Login Page -->
+  <div id="login-page" class="container auth-container">
+    <h1>Login</h1>
+    <form id="login-form">
+      <input type="email" id="login-email" placeholder="Email" required />
+      <input type="password" id="login-password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+  </div>
+
+  <!-- Sign Up Page -->
+  <div id="signup-page" class="container auth-container hidden">
+    <h1>Sign Up</h1>
+    <form id="signup-form">
+      <input type="email" id="signup-email" placeholder="Email" required />
+      <input type="password" id="signup-password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+  </div>
+
+  <!-- Home Page -->
+  <div id="home-page" class="container hidden">
+    <div class="top-nav">
+      <h1 class="main-title">Health Monitor AI</h1>
+      <button class="logout-button" onclick="logout()">⎋ Logout</button>
+    </div>
+    <div class="home-container">
+      <div class="option-box" onclick="navigateTo('auto-detect')">
+        <img
+          src="data:image/png;base64,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" />
+        <h2>Auto Detect</h2>
+      </div>
+      <!-- History option -->
+      <div class="option-box" onclick="navigateTo('history')">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFBElEQVR4nO2dy4/cRBDGO+J9zYEcWGm3y8uBcIK9gFgIQQghUESUhDfixOMSAkJC4bYXEDtVHmk5Ih7hRIAL4u9A4iGCEHBAmkyVV4BCEArLI4lRTxCZ8XjW9owz3Y7rk+rkLtv1/ba77bZ3bIxKpVKpVCqVyqMi5IcsSt+i9KKY91fOj3m/JTnpoon5QHIAkDcBWSz19xmfcidgkf8GktSFJf4n6vQfLZvv2rqckPKB+o9Nmw8kbHwJKLkHSLaGTuZCIJ+1KE8V5VtMHs4U06x8kkN5+caHFrubt1nk38eKKVnURDOakk/5MLwAWY77twDKrxOLKRg+crp5kPmAfBZifjybv0TJI9vlm3kLUL4sLGaCKaXNCCQfMlCKYHgCwudLFzRkSmUzAskHBwX5icJhzhuQqgX9Z8pUZgSSD25OKZnfCCBtCqNAxDsEBUL+jVcg5N9sBRKAwaBA/JsKCsS/kaBA/JsHCsS/YaBA/JsECuSiCaHcuJqa91f3cczleoKgQBQIaA+ZLO0hAUykEFCYect3wRB4KBDyD0GBkH/jGwuk7uOYOUuBKJBq0h4iOmSBDln19ZC2hZm3fBcMgYcCIf8QFAj5N76xQGbdb93naWrajwKpKAWiPSTVIWsbaQ8JYEKFAMLMW74LhsBDgZB/CAqE/BvfWCDzPg8zp+MokIwUSIER2kNEhyzQIUsve6Hpc0jbwigQ8Q5BgZB/4xUI+TdbgQRgMCgQ/6aCAvFvJCiQ1sYZQPnWEh+LUO43abpD70MonLAon0exrOiNIQUF5U+I+UW9U6fgwLx8CZZO+JxF+WCpI3sWur2dLiJK7rYox/N+r9HG/KRpkRa6vZ3Om3w/Bt4drBPIKejIA5NzkwcHbUb+Kvi3G7u9G0wLBTl+APFpu7G5q8JOth0HVwvzY14dtB3NPW5aKtvhO3P8eG92IMSHS58E8eFsV10m2W1aKiA+MrUf+b2Dv96zll5Z+gw+Tq+o8oPM0Mrg7vRASA6ZinK/Eu2/aAk2LMrPu9dOXF0ZiCX+KZu48lZ6FZC84XbqAlBez/ag5Te/v2awLYDiIdBwV2PT9JB3s23cpDTWDuWdsXbEx3wXDUEHH63eQ2J+ZmR7zKuTDhBh//bhtlEsz/kvWoINi/JJZSDu8xUV/upHepNbw/FdNIQdX1UGkr2psyg/TDwAynfDbZfXTy4EUHQaarjvYlUGsrj247WZ7eOfQboYW8NtF7q963wXDSEHyh9lgIwY7kwtDSRzAAUiswNx3Wg4SYcs8T5kfTGcFHX41lFgOqnDXCd1lE+Hk5aQnx3dzneUvewFlOe9j9PU9Mte5FeLVibd5e3YAVDezrazyO/7LhqafmO4RHJX0dKJWyZxyyVumwsgfi136YTkF/9FS7DhvC4EkmekLi5K7TDy/tAnyqJsjCTr8ntaew9Bjk1ZRevJzdnnwVUeUEXIL/geDiDo4HOL63JTaSB5E7Il+SvqJHuneWSpIYUr48VANjZ3uQfyGTNPuQf3E3Oov6/Md3TbHXwaKLm+MpCBwSgHXfcapcvnLcmH7tWf/18D6iR7Afmjqp9tbV+w8/KAmUVAySv+C5HLI5BfMnUoQnnaLYR5L4gaG1tTv0o6EUosK+7F4QCKS5sUlviz7EO++pSmO5aQ73NLJxb5m8Gr9wEUDWHFGUt8wl1JWezfO/O/I6hUKpVKpVKpVCqVuTT6F4xttEbYADioAAAAAElFTkSuQmCC" />
+        <h2>History</h2>
+      </div>
+      <div class="option-box" onclick="window.location.href='extras.html'">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD/0lEQVR4nO3ay24cRRQG4M4CCO8QyVM1XkWJQhILsUIgQhA8RhZBhNxwCA6OwFv6VFsiQeQGTwBBYAd4EjaQy9jxnDN5Bhtp0JmxjMj0TN/qtIP0f9JI3nj+unX11CVJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOB/bDg84FNZcCTXXeA7nmTdk6z5wLc88bX5rH/cMrubyUmX8rIjvj3KJVnTv13gz7spnzDLTpJE66Y547qOstdH2Skva7m0fElbDq0+fdUTf+aCbPkgw5kf4g1PfPnwyh8vx8ieW+kd7JB86kieFmYH2XQki/M3/nolRrZ+jwvyyahOBdlaPi2nljex5IO8X7Ixnu+YJ9108HaT7A7xaW3kytmBe476pxrVO+u/o99TPVs2tdyJhW4mZ13gnRqFGo+a0f/y0n5ke+K/G2UTb+9H9lT6+NUu0EQB5aMq2Z74cqxsF/h8lWxHg4+j1TvjS5UbPrdBUvlg3MuRGoV4uxsGb5XJ7mT8XtTswDtlpy+dpho9lTlPSuPpS1/gtd4ZxYV7UvSynVvpHaz3zij6cK8oW3+EuMCPYmc7kr62ae0OGf+0i90g40+X+MKsbB8GV62y9ddSW9Pk5Gdwtf46IwjbNQo/KsjeNGsU4o1ZVXfEjw0Hw1atdcrc6rM37EbJ3mg5kpftU1mwzp62cO2sbh0zr3cqC5U7xAf50rpgLsiVvGyX8rJ5oxBfa3uq3Kt3ysvVO4Tke/OCkdzI7ZDAd8w7JPCtKfX+xj5b7lXuEEf8ewuj9McpjbJuPhiC/DKl3j+1UO9fq3dI4N9aGKU/TOmQNfMOIfk5Nzvw/Rbq/aByh3iS71polK9zBwPx7RZG6bf5A1FutlDvu3U65IsWCrbY9vrH/ztKl8y3iabX+3rlDnFfDV63Lth8kMN52d2UT1hn68/b3IG4+uyodfbozKSy4fCALvUNR8nDfVsYBu7NHIwG2yaNF4ZKD6IMC3ZuZqOQLBp2yMVZ2bqt0/baqxSzDT6SP0/eHb5UuMFHBlsYJTY2tWz6BBtkbzQ+RYy+BU683QnyZplsR/1TMbfAR1v/JU8u9Yig0cHUxJPBOy7jdxt1xl7D6FlyvKfjwyrZ3YjTR9E0OVHvtH/mhTuginyEe7F2NtUfrY2Pj1+0I9z/XDQoceticqqQh2WnqdgXDfQ91PSCxe709Xg/LliUvQ5zpdTLXm+bEF8oeoFbXMXx2nkZX4p1BUm/R59wrVOJem/EvIJUmi7gnrswtqZbEvpzedrCK5b5rH9ct9AnsgMvzVH/Ncts/X7NGdd1N3v3gqD1JT0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASOz9A4oYF5BGvT2xAAAAAElFTkSuQmCC" />
+        <h2>Extras</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auto Detect Page -->
+  <div id="auto-detect-page" class="container hidden">
+    <button class="nav-button" onclick="goBack()">← Back</button>
+    <div class="auto-detect-container">
+      <h1>Auto Detection</h1>
+      <div class="input-section">
+        <textarea placeholder="Enter your symptoms here..."></textarea>
+        <div class="file-upload">
+          <p>Or upload medical reports</p>
+          <input type="file" accept=".pdf,.doc,.docx,.txt" />
+        </div>
+        <button class="submit-button" onclick="viewResults()">View Results</button>
+      </div>
+    </div>
+  </div>
+  <!-- History Page -->
+  <div id="history-page" class="container hidden">
+    <button class="nav-button" onclick="goBack()">← Back</button>
+    <h1>History Reports</h1>
+    <div id="reports-container" class="reports-grid">
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem('userEmail');
+      document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+      document.getElementById('login-page').classList.remove('hidden');
+    }
+  </script>
+</body>
+
+</html>
