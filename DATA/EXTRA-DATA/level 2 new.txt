@@ -1,0 +1,44 @@
+// Nodes and groups
+User Interface [icon: monitor] {
+  User Authentication [icon: lock, label: "Login/Signup"]
+  Data Input Modules [icon: edit] {
+    Symptoms Input [icon: activity]
+    Medical Reports Upload [icon: file]
+    Test Values Entry [icon: list]
+  }
+  specific Modals [icon: heart]
+}
+
+Backend Processing [icon: server] {
+  RESTful API Endpoints [icon: api] {
+    Auth API [icon: lock, label: "Auth"]
+    Auto detect API [icon: stethoscope, label: "Auto detect"]
+    Disease Prediction API [icon: dna, label: "Disease Prediction"]
+  }
+  Data Preprocessing [icon: filter] {
+    Data Cleaning [icon: filter]
+    Data Encoding [icon: code]
+    Data Imputation [icon: database]
+  }
+  Model Inference Modules [icon: brain] {
+    Logistic Regression Model [icon: graph]
+    LLM for Insights [icon: openai]
+  }
+}
+
+Data Flow & Storage [icon: database] {
+  MongoDB [icon: database]
+}
+
+// Connections
+User Authentication > Auth API
+Data Input Modules > Auto detect API
+specific Modals <> Disease Prediction API
+
+Auth API > MongoDB: store user data
+Auto detect API > Data Preprocessing
+Data Preprocessing > Model Inference Modules
+Model Inference Modules > MongoDB: store predictions
+
+Model Inference Modules > Disease Prediction API
+

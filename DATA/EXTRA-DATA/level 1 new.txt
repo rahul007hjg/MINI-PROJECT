@@ -1,0 +1,32 @@
+// Nodes and groups
+User Interface [icon: monitor] {
+  Web Application [icon: globe]
+  User Authentication [icon: lock]
+}
+
+Medical Record [icon: form]
+
+Backend Services [icon: server] {
+  Flask API [icon: api]
+  Extras Module [icon: activity, label: "Disease Prediction Modals"]
+}
+
+Machine Learning Models [icon: brain] {
+  Predictive Models [icon: bar-chart]
+  LLM Module [icon: openai]
+}
+
+Online Storage [icon: database] {
+  MongoDB Database [icon: database]
+}
+
+// Connections
+Web Application > User Authentication
+Medical Record > Flask API
+User Interface <> Backend Services
+Extras Module > Flask API
+Flask API > Predictive Models
+Flask API > LLM Module
+LLM Module > MongoDB Database :Save Result
+Backend Services <> MongoDB Database : login credentials
+User Interface < MongoDB Database: display Disease Predictions

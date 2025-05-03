@@ -1,0 +1,38 @@
+// Nodes and groups
+User Login [shape: oval, icon: user]
+Enter Medical Reports [icon: file-text]
+Select Detection Method [shape: diamond, icon: search]
+
+Auto Detection Path [color: blue] {
+  Use RAG Model [icon: cpu]
+  Get Model Results [icon: bar-chart-2]
+}
+
+Specific Detection Path [color: green] {
+  Run Specific Models [icon: settings]
+  Get Model Results [icon: bar-chart-2]
+}
+
+Symptoms and Insights [color: purple] {
+  Ask for Symptoms [icon: help-circle]
+  Get More Insights [icon: insights]
+}
+
+Visualization and Recommendations [color: orange] {
+  Provide Graphical Visualization [icon: pie-chart]
+  Give Recommendations [icon: thumbs-up]
+  Suggest Doctor Visit [shape: oval, icon: stethoscope]
+}
+
+// Relationships
+User Login > Enter Medical Reports
+Enter Medical Reports > Select Detection Method
+Select Detection Method > Use RAG Model: Auto
+Select Detection Method > Run Specific Models: Specific
+Use RAG Model > Get Model Results
+Run Specific Models > Get Model Results
+Get Model Results > Ask for Symptoms
+Ask for Symptoms > Get More Insights
+Get More Insights > Provide Graphical Visualization
+Provide Graphical Visualization > Give Recommendations
+Give Recommendations > Suggest Doctor Visit

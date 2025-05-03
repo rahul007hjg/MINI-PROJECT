@@ -1,0 +1,50 @@
+// Diagram elements
+User Interface [icon: monitor] {
+  Web Application [icon: globe]
+  User Authentication [icon: lock]
+  
+}
+
+Medical Record [icon: form]
+  Disease Prediction Modals [icon: activity]
+
+Backend Services [icon: server] {
+  Flask API [icon: flask] {
+    Auto Detection  [icon: ai]
+    Extras [icon: loader]
+  }
+}
+
+Machine Learning Models [icon: brain] {
+  Predictive Models [icon: bar-chart] {
+    Select Specific Model [icon:bar-chart]
+              }
+  LLM Module [icon: openai]
+}
+
+Online Storage [icon: database] {
+    MongoDB Database [icon: database]
+}
+Disease Prediction [icon: stethoscope]
+
+// Connections
+Web Application > User Authentication
+
+
+Medical Record > Flask API
+User Interface <> Backend Services
+Disease Prediction Modals > Flask API
+
+
+
+
+Auto Detection  > LLM Module
+Extras > Predictive Models
+
+
+Select Specific Model > Disease Prediction
+LLM Module > MongoDB Database: store result
+Backend Services <> MongoDB Database: user authentication
+MongoDB Database > Disease Prediction
+
+
