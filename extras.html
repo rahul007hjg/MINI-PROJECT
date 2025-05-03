@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extras - Health Monitor AI</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Modal styling (shared for both modals) */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal.hidden {
+      display: none;
+    }
+
+    .modal-content {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    label,
+    p {
+      display: block;
+      margin: 0.5rem 0 0.25rem;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .submit-button,
+    .nav-button {
+      padding: 10px 20px;
+      margin: 10px 5px 0 0;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .submit-button {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .nav-button {
+      background-color: #ccc;
+    }
+
+    .result-box {
+      background-color: var(--white);
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      font-weight: bold;
+      color: var(--dark-blue);
+      text-align: center;
+    }
+
+    .result-box.hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="extras-page" class="container">
+    <h1>Extras</h1>
+    <div class="disease-container">
+      <div class="disease-option" onclick="openDiabetesModal()">Diabetes</div>
+      <div class="disease-option" onclick="openLiverModal()">Liver Disease</div>
+      <div class="disease-option" onclick="openMentalModal()">Student Mental Health</div>
+      <div class="disease-option" onclick="alert('Other diseases coming soon.')">Other diseases (Coming soon)</div>
+    </div>
+  </div>
+
+  <!-- Diabetes Prediction Modal -->
+  <div id="diabetes-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Diabetes Prediction</h2>
+      <form id="diabetes-form">
+        <label>Age: <input type="number" name="age" required /></label>
+        <label>Gender:
+          <select name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </label>
+        <p>Have you experienced excessive urination?</p>
+        <label><input type="radio" name="polyuria" value="1" required /> Yes</label>
+        <label><input type="radio" name="polyuria" value="0" required /> No</label>
+        <p>Have you experienced excessive thirst or drinking?</p>
+        <label><input type="radio" name="polydipsia" value="1" required /> Yes</label>
+        <label><input type="radio" name="polydipsia" value="0" required /> No</label>
+        <p>Have you experienced sudden weight loss?</p>
+        <label><input type="radio" name="sudden_weight_loss" value="1" required /> Yes</label>
+        <label><input type="radio" name="sudden_weight_loss" value="0" required /> No</label>
+        <p>Have you felt unusually weak?</p>
+        <label><input type="radio" name="weakness" value="1" required /> Yes</label>
+        <label><input type="radio" name="weakness" value="0" required /> No</label>
+        <p>Have you experienced excessive hunger?</p>
+        <label><input type="radio" name="polyphagia" value="1" required /> Yes</label>
+        <label><input type="radio" name="polyphagia" value="0" required /> No</label>
+        <p>Have you had a yeast infection?</p>
+        <label><input type="radio" name="genital_thrush" value="1" required /> Yes</label>
+        <label><input type="radio" name="genital_thrush" value="0" required /> No</label>
+        <p>Have you experienced blurred vision?</p>
+        <label><input type="radio" name="visual_blurring" value="1" required /> Yes</label>
+        <label><input type="radio" name="visual_blurring" value="0" required /> No</label>
+        <p>Have you experienced significant itching?</p>
+        <label><input type="radio" name="itching" value="1" required /> Yes</label>
+        <label><input type="radio" name="itching" value="0" required /> No</label>
+        <p>Have you felt unusually irritable?</p>
+        <label><input type="radio" name="irritability" value="1" required /> Yes</label>
+        <label><input type="radio" name="irritability" value="0" required /> No</label>
+        <p>Have you noticed slow healing of cuts or wounds?</p>
+        <label><input type="radio" name="delayed_healing" value="1" required /> Yes</label>
+        <label><input type="radio" name="delayed_healing" value="0" required /> No</label>
+        <p>Have you experienced partial muscle weakness?</p>
+        <label><input type="radio" name="partial_paresis" value="1" required /> Yes</label>
+        <label><input type="radio" name="partial_paresis" value="0" required /> No</label>
+        <p>Have you experienced muscle stiffness?</p>
+        <label><input type="radio" name="muscle_stiffness" value="1" required /> Yes</label>
+        <label><input type="radio" name="muscle_stiffness" value="0" required /> No</label>
+        <p>Have you experienced hair loss?</p>
+        <label><input type="radio" name="alopecia" value="1" required /> Yes</label>
+        <label><input type="radio" name="alopecia" value="0" required /> No</label>
+        <p>Are you overweight?</p>
+        <label><input type="radio" name="obesity" value="1" required /> Yes</label>
+        <label><input type="radio" name="obesity" value="0" required /> No</label>
+        <button type="submit" class="submit-button">Predict Diabetes</button>
+        <button type="button" class="nav-button" onclick="closeDiabetesModal()">Close</button>
+      </form>
+      <div id="diabetes-result" class="result-box hidden"></div>
+    </div>
+  </div>
+
+  <!-- Liver Disease Prediction Modal -->
+  <div id="liver-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Liver Disease Prediction</h2>
+      <form id="liver-form">
+        <label>Age: <input type="number" name="age" required /></label>
+        <label>Sex:
+          <select name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </label>
+        <label>Total Bilirubin (mg/dL) (Normal: 0.1-1.2): <input type="number" step="0.1" name="total_bilirubin"
+            required /></label>
+        <label>Direct Bilirubin (mg/dL) (Normal: 0.0-0.3): <input type="number" step="0.1" name="direct_bilirubin"
+            required /></label>
+        <label>ALP (IU/L) (Normal: 44-147): <input type="number" name="alkaline_phosphotase" required /></label>
+        <label>ALT (IU/L) (Normal: 7-56): <input type="number" name="alt" required /></label>
+        <label>AST (IU/L) (Normal: 10-40): <input type="number" name="ast" required /></label>
+        <label>Total Proteins (g/dL) (Normal: 6.0-8.3): <input type="number" step="0.1" name="total_proteins"
+            required /></label>
+        <label>Albumin (g/dL) (Normal: 3.5-5.0): <input type="number" step="0.1" name="albumin" required /></label>
+        <label>A/G Ratio (Normal: 1.0-2.5): <input type="number" step="0.1" name="ag_ratio" required /></label>
+        <button type="submit" class="submit-button">Predict Liver Disease</button>
+        <button type="button" class="nav-button" onclick="closeLiverModal()">Close</button>
+      </form>
+      <div id="liver-result" class="result-box hidden"></div>
+    </div>
+  </div>
+
+  <!-- Student Mental Health Prediction Modal -->
+  <div id="mental-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Student Mental Health Prediction</h2>
+      <form id="mental-form">
+        <label>Gender:
+          <select name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </label>
+        <label>Age: <input type="number" name="age" required /></label>
+        <label>Current Year of Study (Enter a number, e.g., 1, 2, 3, 4): <input type="number" name="year"
+            required /></label>
+        <label>What is your CGPA?
+          <select name="cgpa" required>
+            <option value="2.50 - 2.99">2.50 - 2.99</option>
+            <option value="3.00 - 3.49">3.00 - 3.49</option>
+            <option value="3.50 - 4.00">3.50 - 4.00</option>
+          </select>
+        </label>
+        <label>Marital status (Are you married?):
+          <select name="marital" required>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </label>
+        <label>Did you seek any specialist for a treatment?
+          <select name="specialist" required>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </label>
+        <button type="submit" class="submit-button">Predict Mental Health</button>
+        <button type="button" class="nav-button" onclick="closeMentalModal()">Close</button>
+      </form>
+      <div id="mental-result" class="result-box hidden"></div>
+    </div>
+  </div>
+
+  <script>
+    // Diabetes modal controls
+    function openDiabetesModal() {
+      document.getElementById("diabetes-modal").classList.remove("hidden");
+    }
+    function closeDiabetesModal() {
+      document.getElementById("diabetes-modal").classList.add("hidden");
+      document.getElementById("diabetes-form").reset();
+      document.getElementById("diabetes-result").classList.add("hidden");
+    }
+    document.getElementById("diabetes-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value });
+      const resultBox = document.getElementById("diabetes-result");
+      resultBox.classList.remove("hidden");
+      resultBox.textContent = "Predicting...";
+      try {
+        const res = await fetch("http://localhost:5000/predict_diabetes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (result.success) {
+          resultBox.textContent = `Prediction: ${result.prediction}`;
+          alert(result.disclaimer);
+        } else {
+          resultBox.textContent = "Error: " + result.error;
+        }
+      } catch (error) {
+        resultBox.textContent = "Request failed: " + error;
+      }
+    });
+
+    // Liver modal controls
+    function openLiverModal() {
+      document.getElementById("liver-modal").classList.remove("hidden");
+    }
+    function closeLiverModal() {
+      document.getElementById("liver-modal").classList.add("hidden");
+      document.getElementById("liver-form").reset();
+      document.getElementById("liver-result").classList.add("hidden");
+    }
+    document.getElementById("liver-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value });
+      const resultBox = document.getElementById("liver-result");
+      resultBox.classList.remove("hidden");
+      resultBox.textContent = "Predicting...";
+      try {
+        const res = await fetch("http://localhost:5000/predict_liver", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (result.success) {
+          resultBox.textContent = `Prediction: ${result.prediction}`;
+          alert(result.disclaimer);
+        } else {
+          resultBox.textContent = "Error: " + result.error;
+        }
+      } catch (error) {
+        resultBox.textContent = "Request failed: " + error;
+      }
+    });
+
+    // Mental modal controls
+    function openMentalModal() {
+      document.getElementById("mental-modal").classList.remove("hidden");
+    }
+    function closeMentalModal() {
+      document.getElementById("mental-modal").classList.add("hidden");
+      document.getElementById("mental-form").reset();
+      document.getElementById("mental-result").classList.add("hidden");
+    }
+    document.getElementById("mental-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value });
+      const resultBox = document.getElementById("mental-result");
+      resultBox.classList.remove("hidden");
+      resultBox.textContent = "Predicting...";
+      try {
+        const res = await fetch("http://localhost:5000/predict_mental", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (result.success) {
+          resultBox.textContent = `Prediction: ${result.prediction}`;
+          alert(result.disclaimer);
+        } else {
+          resultBox.textContent = "Error: " + result.error;
+        }
+      } catch (error) {
+        resultBox.textContent = "Request failed: " + error;
+      }
+    });
+  </script>
+</body>
+
+</html>
